@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marathi Quote Generator</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: azure;
+            background-image: url(bc3.jpg);
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 300px;
+        }
+        h1 {
+            color: red;
+            margin-bottom: 20px;
+        }
+        .button {
+            margin: 20px 0;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: yellow;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #quote {
+            font-size: 18px;
+            color: #555;
+            margin-top: 20px;
+            font-style: italic;
+        }
+    </style>
+    <script >
+        const quotes =[
+            " स्वप्न ती नसतात जी तुम्हाला झोपल्यावर पडतात,  स्वप्नं ती असतात जी तुम्हाला झोपू देत नाहीत - एपीजे अब्दुल कलाम",
+            "प्रवाहाच्या विरुद्ध दिशेला तेच पोहू शकतात ज्यांचे निर्धार ठाम असतात, ज्यांना कुठलेतरी ध्येय गाठायचे असते – महात्मा ज्योतिबा फुले ",
+            "कोणतंही काम महान बनवण्याचा एकच मार्ग आहे की, ते काम आवडीने करा – स्टीव्ह जॉब्स",
+            "यश तुमच्याकडून काहीही चूक झाली नाही यामध्ये नसून एक चूक दुसऱ्यांदा करत नाही यात आहे – जॉर्ज बर्नार्ड शॉ.",
+            "तुमचं यश यावरून ठरवा की, तुम्ही ते मिळवण्यासाठी काय गमावलं आहे – दलाई लामा."
+        ];
+
+        function generateQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const randomQuote = quotes[randomIndex];
+            document.getElementById("quote").textContent = randomQuote;
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Marathi Motivational Quote Generator</h1>
+        <div class="button">
+            <button onclick="generateQuote()">Generate Quote</button>
+        </div>
+        <p id="quote">Click the button to see a Marathi quote!</p>
+    </div>
+</body>
+</html>
