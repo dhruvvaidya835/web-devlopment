@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History Quiz</title>
+    <style>
+        body {
+            font-family: "Times New Roman", Times, serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f8ff;
+            background-image: url(h1.jpg);
+        }
+        .container {
+            text-align: center;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            width: 600px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+        .question {
+            font-size: 24px;
+            color: #34495e;
+            margin-bottom: 20px;
+        }
+        .options {
+            margin: 15px 0;
+        }
+        .options button {
+            margin: 10px;
+            padding: 15px 30px;
+            font-size: 18px;
+            color: white;
+            background-color: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        .options button:nth-child(1) {
+            background-color: #3498db;
+        }
+        .options button:nth-child(2) {
+            background-color: #e74c3c;
+        }
+        .options button:nth-child(3) {
+            background-color: #2ecc71;
+        }
+        .options button:nth-child(4) {
+            background-color: #9b59b6;
+        }
+        .options button:hover {
+            opacity: 0.9;
+        }
+        #result {
+            font-size: 20px;
+            color: #444;
+            margin-top: 20px;
+        }
+        #next {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 18px;
+            color: white;
+            background-color: #28a745;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #next:hover {
+            background-color: #218838;
+        }
+    </style>
+    <script>
+        const questions = [
+            {
+                question: "What is the capital of France?",
+                options: ["Berlin", "Madrid", "Paris", "Rome"],
+                correct: "Paris"
+            },
+            {
+                question: "Who was the first President of the United States?",
+                options: ["George Washington", "Abraham Lincoln", "Thomas Jefferson", "John Adams"],
+                correct: "George Washington"
+            },
+            {
+                question: "In which year did World War II end?",
+                options: ["1945", "1939", "1918", "1950"],
+                correct: "1945"
+            },
+            {
+                question: "Who discovered penicillin?",
+                options: ["Alexander Fleming", "Marie Curie", "Louis Pasteur", "Isaac Newton"],
+                correct: "Alexander Fleming"
+            },
+            {
+                question: "What was the name of the ship that sank in 1912, considered one of the deadliest maritime disasters?",
+                options: ["Titanic", "Lusitania", "Bismarck", "Queen Mary"],
+                correct: "Titanic"
+            },
+            {
+                question: "Who painted the Mona Lisa?",
+                options: ["Leonardo da Vinci", "Michelangelo", "Raphael", "Vincent van Gogh"],
+                correct: "Leonardo da Vinci"
+            },
+            {
+                question: "Which empire was ruled by Genghis Khan?",
+                options: ["Mongol Empire", "Roman Empire", "Ottoman Empire", "British Empire"],
+                correct: "Mongol Empire"
+            },
+            {
+                question: "In which year did the American Civil War begin?",
+                options: ["1861", "1776", "1812", "1901"],
+                correct: "1861"
+            },
+            {
+                question: "What was the primary language of the Roman Empire?",
+                options: ["Latin", "Greek", "Italian", "Spanish"],
+                correct: "Latin"
+            },
+            {
+                question: "Who was the first human to travel into space?",
+                options: ["Yuri Gagarin", "Neil Armstrong", "Buzz Aldrin", "John Glenn"],
+                correct: "Yuri Gagarin"
+            },
+            {
+                question: "What ancient civilization built the Machu Picchu?",
+                options: ["Inca", "Maya", "Aztec", "Olmec"],
+                correct: "Inca"
+            },
+            {
+                question: "Who was known as the 'Iron Lady'?",
+                options: ["Margaret Thatcher", "Angela Merkel", "Indira Gandhi", "Golda Meir"],
+                correct: "Margaret Thatcher"
+            },
+            {
+                question: "Which war was fought between the North and South regions in the United States?",
+                options: ["American Civil War", "Revolutionary War", "World War I", "World War II"],
+                correct: "American Civil War"
+            },
+            {
+                question: "Which ancient Greek philosopher was the teacher of Alexander the Great?",
+                options: ["Aristotle", "Plato", "Socrates", "Pythagoras"],
+                correct: "Aristotle"
+            },
+            {
+                question: "What is the oldest known written language?",
+                options: ["Sumerian", "Latin", "Greek", "Egyptian"],
+                correct: "Sumerian"
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        function loadQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            document.querySelector('.question').textContent = currentQuestion.question;
+            const optionsContainer = document.querySelector('.options');
+            optionsContainer.innerHTML = '';
+            currentQuestion.options.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.onclick = checkAnswer.bind(button, currentQuestion.correct);
+                optionsContainer.appendChild(button);
+            });
+            document.getElementById('result').textContent = 'Choose an answer above.';
+        }
+
+        function checkAnswer(correctAnswer) {
+            const selectedAnswer = this.textContent;
+            const resultElement = document.getElementById('result');
+
+            if (selectedAnswer === correctAnswer) {
+                resultElement.textContent = "Correct! 🎉";
+            } else {
+                resultElement.textContent = "Wrong! Try again. ❌";
+            }
+        }
+
+        function nextQuestion() {
+            currentQuestionIndex++;
+            if (currentQuestionIndex >= questions.length) {
+                currentQuestionIndex = 0;
+            }
+            loadQuestion();
+        }
+
+        window.onload = function() {
+            loadQuestion();
+            document.getElementById('next').onclick = nextQuestion;
+        };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>History Quiz</h1>
+        <div class="question">What is the capital of France?</div>
+        <div class="options">
+            <button>Berlin</button>
+            <button>Madrid</button>
+            <button>Paris</button>
+            <button>Rome</button>
+        </div>
+        <div id="result">Choose an answer above.</div>
+        <button id="next" style="margin-top: 20px; padding: 15px 30px; font-size: 18px; color: white; background-color: #007BFF; border: none; border-radius: 5px; cursor: pointer;">Next Question</button>
+    </div>
+</body>
+</html>
